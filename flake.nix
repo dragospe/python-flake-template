@@ -10,23 +10,25 @@
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
-        # https://github.com/DavHau/mach-nix/issues/153#issuecomment-717690154
 
+        poetry-env = pkgs.poetry2nix.mkPoetryEnv { projectDir = ./.; };
       in
       {
-        devShell = (pkgs.poetry2nix.mkPoetryEnv { projectDir = ./.; }).env.overrideAttrs (oldAttrs: {
+        devShell = poetry-env.env.overrideAttrs (oldAttrs: {
           buildInputs = with pkgs;
             [
               nixpkgs-fmt
               entr
               fd
+              poetry
             ];
         });
-         packages =
-           { default = pkgs.poetry2nix.mkPoetryApplication {
-               projectDir = ./.;
-             };
-           };
+        packages =
+          {
+            default = pkgs.poetry2nix.mkPoetryApplication {
+              projectDir = ./.;
+            };
+          };
 
       });
 }
