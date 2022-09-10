@@ -14,12 +14,12 @@ IMAGE_URL = "https://farm1.staticflickr.com/422/32287743652_9f69a6e9d9_b.jpg"
 IMAGE_SIZE = (300, 300)
 
 
-@app.route('/')
+@app.route("/")
 def hello():
     return "Hello World!"
 
 
-@app.route('/image')
+@app.route("/image")
 def image():
     r = requests.get(IMAGE_URL)
     if not r.status_code == 200:
@@ -29,16 +29,16 @@ def image():
 
     img = Image.open(BytesIO(r.content))
     img.thumbnail(IMAGE_SIZE)
-    img.save(img_io, 'JPEG', quality=70)
+    img.save(img_io, "JPEG", quality=70)
 
     img_io.seek(0)
 
-    return send_file(img_io, mimetype='image/jpeg')
+    return send_file(img_io, mimetype="image/jpeg")
 
 
 def main():
     app.run()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
