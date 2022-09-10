@@ -58,10 +58,10 @@ format: format_python format_nix
 format_check: format_check_python format_check_nix
 
 format_python: requires_nix_shell
-	black -l 80 -v -t py311 ./
+	black -l 80 ./
 
 format_check_python: requires_nix_shell
-	black -l 80 --check -v -t py311 ./
+	black -l 80 --check -v ./
 
 format_nix: requires_nix_shell
 	nixpkgs-fmt ./flake.nix

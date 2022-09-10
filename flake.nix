@@ -1,4 +1,5 @@
-{ description = "Flake to manage python workspace";
+{
+  description = "Flake to manage python workspace";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/master";
@@ -8,20 +9,24 @@
   outputs = { self, nixpkgs, flake-utils, mach-nix }:
     flake-utils.lib.eachDefaultSystem (system:
       let
-        python = "python39"; # <--- change here
         pkgs = nixpkgs.legacyPackages.${system};
         # https://github.com/DavHau/mach-nix/issues/153#issuecomment-717690154
-        mach-nix-wrapper = import mach-nix { inherit pkgs python; };
-        requirements = builtins.readFile ./requirements.txt;
-        pythonBuild = mach-nix-wrapper.mkPython { inherit requirements; };
-      in {
-        devShell = pkgs.mkShell {
-          buildInputs = [
-            pkgs.python3
-            pkgs.poetry
-          ];
-        };
 
+      in
+      {
+        devShell = (pkgs.poetry2nix.mkPoetryEnv { projectDir = ./.; }).env.overrideAttrs (oldAttrs: {
+          buildInputs = with pkgs;
+            [
+              nixpkgs-fmt
+              entr
+              fd
+            ];
+        });
+         packages =
+           { default = pkgs.poetry2nix.mkPoetryApplication {
+               projectDir = ./.;
+             };
+           };
 
       });
 }
