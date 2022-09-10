@@ -1,5 +1,5 @@
 ##
-# [TODO: RENAME ME]: Stub Makefile. Add your name here
+# [TODO: RENAME ME]: Stub Makefile. Add a description here
 #
 # @file
 # @version 0.1
@@ -11,20 +11,18 @@ usage:
 	@echo "usage: make <command>"
 	@echo
 	@echo "Available commands:"
-	@echo "  build               -- Run cabal v2-build"
+	@echo "  build               -- Run a \`poetry2nix\` build"
 	@echo "  watch [COMMAND]     -- Track files and run 'make COMMAND' on change"
-	@echo "  test                -- Run cabal v2-test"
-	@echo "  format              -- Apply source code formatting with fourmolu"
+	@echo "  test                -- Run pytest"
+	@echo "  format              -- Apply nix and python source code formatting"
 	@echo "  format_check        -- Check source code formatting without making changes"
-	@echo "  format_python"
-	@echo "  format_check_python    -- Check nix files for format errors"
-	@echo "  format_nix"
-	@echo "  format_check_nix    -- Check nix files for format errors"
-	@echo "  format_python"
-	@echo "  lint                -- Check the sources with hlint"
-	@echo "  lint_refactor"
-	@echo "  bench               -- Run script benchmark suite"
-	@echo "  ci                  -- Run the whole CI check via nix"
+	@echo "  format_python       -- Run \`black\` to reformat python code"
+	@echo "  format_check_python -- Run \`black\` to check for format errors"
+	@echo "  format_nix          -- Run \`nixpkgs-fmt\` to format nix code"
+	@echo "  format_check_nix    -- Run \`nixpkgs-fmt\` to check nix files for format errors"
+	@echo "  lint                -- Check the sources with pylint and flake8"
+
+#	@echo "  ci                  -- Run the whole CI check via nix"
 
 ## Bookkeeping
 
@@ -71,5 +69,4 @@ format_check_nix:
 
 lint:
 	pylint --recursive y ./
-#	@echo "  bench               -- Run script benchmark suite"
-#	@echo "  ci                  -- Run the whole CI check via nix"
+	fd -e '.py' -X flake8 {} ;
