@@ -28,9 +28,8 @@ differ by operating system.
 
 For non-NixOS operating systems, edit either `~/.config/nix/nix.conf` or 
 `/etc/nix/nix.conf` and add `experimental-features = nix-command flakes`.
-If the Nix installation is in multi-user mode, don’t forget to restart the         
-with `sudo systemctl restart nix-daemon`.
-
+If the Nix installation is in multi-user mode, don’t forget to restart the
+nix daemon with `sudo systemctl restart nix-daemon`.
 
 For NixOS, set the following options in `configuration.nix` and run 
 `nixos-rebuild`:
