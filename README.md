@@ -3,12 +3,17 @@
 - [Python Flake Template](#python-flake-template)
   * [Setup](#setup)
     + [Prerequisites](#prerequisites)
+      - [Installing Nix](#installing-nix)
+      - [Enabling Flakes](#enabling-flakes)
+      - [(Optional) Installing `nix-direnv`](#-optional--installing--nix-direnv-)
     + [Instructions](#instructions)
   * [Usage Instructions](#usage-instructions)
-    + [Adding a dependency](#adding-a-dependency)
+    + [Manipulating dependencies](#manipulating-dependencies)
 - [Troubleshooting](#troubleshooting)
   * [`error: metadata-generation-failed`](#-error--metadata-generation-failed-)
-- [Things to note](#things-to-note)
+- [Things to note:](#things-to-note-)
+  * [`mypy` version pinning](#-mypy--version-pinning)
+  * [Non-flake compatibility](#non-flake-compatibility)
 
 ## Setup 
 
