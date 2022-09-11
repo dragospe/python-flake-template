@@ -14,8 +14,10 @@
 
 ### Prerequisites
 
+#### Installing Nix
 First, install `nix` by following [the instructions](https://nixos.org/download.html) for your operating system.
 
+#### Enabling Flakes
 Then, users must enable `nix flakes`. The instructions to do so
 differ by operating system.
 
@@ -33,6 +35,16 @@ For NixOS, set the following options in `configuration.nix` and run
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
 ```
+
+#### (Optional) Installing `nix-direnv`
+
+`direnv` is a utility that allows users to set project-local 
+environment variables. `nix-direnv` is a nix-aware version of this
+that can greatly speed up nix operations, such as `nix develop`.
+
+Follow the instructions [on Github](https://github.com/nix-community/nix-direnv)
+to set up `nix-direnv`, then run `direnv allow` at the top level of this
+repository.
 
 ### Instructions
 
@@ -54,11 +66,13 @@ For NixOS, set the following options in `configuration.nix` and run
      - `flake8`
      - `pylint`
      - `pytest`
-- Use the provided `Makefile` to build, test, or format the project. The `make` 
-  command will print a usage string; examine the `Makefile` itself to understand
-  how it runs specific commands.
+- Use the provided `Makefile` to build, test, or format the project using some
+  sensible defaults. The `make` command will print a usage string. If you do
+  not with to use `make` to interact with your file, you may delete this file;
+  but examining the `Makefile` may help you to understand how to run specific
+  commands.
   
-### Adding a dependency
+### Manipulating dependencies
 
 This flake handles dependency management via nix, which uses `poetry2nix`, which
 uses `poetry` underneath. To add a dependency, use `poetry add <package name>`. 
