@@ -5,7 +5,7 @@
 # @version 0.1
 
 .PHONY: build watch test format format_check lint lint_check requires_nix_shell \
-  bench ci
+  format_python format_check_python format_nix format_check_nix typecheck lint
 
 usage:
 	@echo "usage: make <command>"
@@ -23,8 +23,6 @@ usage:
 	@echo "  format_check_nix    -- Run \`nixpkgs-fmt\` to check nix files for format errors"
 	@echo "  typecheck           -- run \`mypy\`"
 	@echo "  lint                -- Check the sources with pylint and flake8"
-
-#	@echo "  ci                  -- Run the whole CI check via nix"
 
 ## Bookkeeping
 
@@ -88,7 +86,6 @@ lint:
 	@echo ""
 	@pylint --recursive y ./
 	@echo ""
-
 	@echo "########################################"
 	@echo "##          Running flake8            ##"
 	@echo "########################################"
