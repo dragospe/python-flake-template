@@ -1,3 +1,5 @@
+# Author: Peter Dragos
+# Repository: https://github.com/dragospe/python-flake-template
 [tool.poetry]
 name = "app"
 version = "0.1.0"

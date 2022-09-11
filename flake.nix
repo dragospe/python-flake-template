@@ -1,3 +1,5 @@
+# Author: Peter Dragos
+# Repository: https://github.com/dragospe/python-flake-template
 {
   description = "Flake to manage python workspace";
 

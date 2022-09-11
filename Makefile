@@ -1,5 +1,6 @@
 ##
-# [TODO: RENAME ME]: Stub Makefile. Add a description here
+# Author: Peter Dragos
+# Repository: https://github.com/dragospe/python-flake-template
 #
 # @file
 # @version 0.1
