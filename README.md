@@ -13,5 +13,11 @@ If you get an error like
 ```
 
 this is most likely because nix derivations built using flakes only can 
-access files that are known to git. You probably forgot to `git add` 
+access files that git knows about. You probably forgot to `git add` 
 new code. *Note*: you do not need to _commit_ the code, just add it.
+
+# Things to note:
+
+This template installs `mypy` pinned to `=0.961`, because a version of spec of
+the latest version at the time of creation (`^0.971`) was failing. When
+the upstream has a fix, this repo should pull in an update.
