@@ -14,12 +14,14 @@ usage:
 	@echo "  build               -- Run a \`poetry2nix\` build"
 	@echo "  watch [COMMAND]     -- Track files and run 'make COMMAND' on change"
 	@echo "  test                -- Run pytest"
+	@echo "  check               -- Run formatting, linting, and type checks"
 	@echo "  format              -- Apply nix and python source code formatting"
 	@echo "  format_check        -- Check source code formatting without making changes"
 	@echo "  format_python       -- Run \`black\` to reformat python code"
 	@echo "  format_check_python -- Run \`black\` to check for format errors"
 	@echo "  format_nix          -- Run \`nixpkgs-fmt\` to format nix code"
 	@echo "  format_check_nix    -- Run \`nixpkgs-fmt\` to check nix files for format errors"
+	@echo "  typecheck           -- run \`mypy\`"
 	@echo "  lint                -- Check the sources with pylint and flake8"
 
 #	@echo "  ci                  -- Run the whole CI check via nix"
@@ -51,6 +53,8 @@ test: requires_nix_shell
 
 ## Formatting and linting
 
+check: format_check lint typecheck
+
 format: format_python format_nix
 
 format_check: format_check_python format_check_nix
@@ -59,14 +63,43 @@ format_python: requires_nix_shell
 	black -l 80 ./
 
 format_check_python: requires_nix_shell
-	black -l 80 --check -v ./
+	@echo "########################################"
+	@echo "##          Running black             ##"
+	@echo "########################################"
+	@echo ""
+	@black -l 80 --check ./
+	@echo ""
 
 format_nix: requires_nix_shell
 	nixpkgs-fmt ./flake.nix
 
 format_check_nix:
-	nixpkgs-fmt --check ./flake.nix
+	@echo "########################################"
+	@echo "##          Running nixpgs-fmt        ##"
+	@echo "########################################"
+	@echo ""
+	@nixpkgs-fmt --check ./flake.nix
+	@echo ""
 
 lint:
-	pylint --recursive y ./
-	fd -e '.py' -X flake8 {} ;
+	@echo "########################################"
+	@echo "##          Running pylint            ##"
+	@echo "########################################"
+	@echo ""
+	@pylint --recursive y ./
+	@echo ""
+
+	@echo "########################################"
+	@echo "##          Running flake8            ##"
+	@echo "########################################"
+	@echo ""
+	@fd -e '.py' -X flake8 {} ;
+	@echo ""
+
+typecheck:
+	@echo "########################################"
+	@echo "##          Running mypy              ##"
+	@echo "########################################"
+	@echo ""
+	@mypy --strict ./
+	@echo ""
