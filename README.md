@@ -100,6 +100,13 @@ yet "know" about they file, and can't use it to build your project.
 
 # Things to note:
 
+## `mypy` version pinning
+
 This template installs `mypy` pinned to `=0.961`, because a version of spec of
 the latest version at the time of creation (`^0.971`) was failing. When
 the upstream has a fix, this repository should pull in an update.
+
+## Non-flake compatibility
+
+We recommend using nix flakes to use this template, but we provide non-flake
+compatibility via [`flake-compat`](https://github.com/edolstra/flake-compat).
